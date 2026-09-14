@@ -1,9 +1,9 @@
 // MENSAJEROS DE PELICULA PARTE 1
 object puenteDeBrooklyn{
   method pesaMenosDe1Tonelada(mensajero, paquete){
-    return mensajero + paquete <= 1000
+    return mensajero.peso() + paquete.peso() <= 1000
   }
-  method puedePasar(paquete, mensajero){
+  method puedeEntregarElPaquete(paquete, mensajero){
     return paquete.estaPago() and self.pesaMenosDe1Tonelada(paquete, mensajero)
   }
 }
@@ -17,7 +17,7 @@ object LaMatrix{
 }
 object roberto{
   var transporte = camion
-  const peso = 90 + transporte
+  const peso = 90 + transporte.peso()
   method cambiarTransporte(vehiculo){
     transporte = vehiculo
   }
@@ -38,11 +38,15 @@ object chuckNorris{
    }
 }
 object neo{
+  var credito = false
+  method cargarCredito(){
+    credito = true
+  }
   method peso(){
     return 0
   }
   method tieneCredito(){
-    return 
+    return credito
   }
 }
 object camion{
@@ -58,6 +62,23 @@ object bicicleta{
    method peso(){
     return 5
    }
+}
+object unPaquete{
+  var peso = 0
+  var pagoAprobado = false
+  method aprobarPago(){
+    pagoAprobado = true
+  }
+  method cambiarPaquete(otroPaquete){
+    peso = otroPaquete
+  }
+  method peso(){
+    return peso
+  }
+  method estaPago(){
+    pagoAprobado = true
+  }
+
 }
 
 // MENSAJERIA 2DA PARTE
