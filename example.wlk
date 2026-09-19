@@ -1,3 +1,4 @@
+
 // MENSAJEROS DE PELICULA PARTE 1
 object puenteDeBrooklyn{
   method pesaMenosDe1Tonelada(mensajero, paquete){
@@ -7,7 +8,7 @@ object puenteDeBrooklyn{
     return paquete.estaPago() and self.pesaMenosDe1Tonelada(paquete, mensajero)
   }
 }
-object LaMatrix{
+object laMatrix{
   method puedeHacerUnaLlamada(mensajero){
     return mensajero.tieneCredito()
   }
@@ -17,12 +18,12 @@ object LaMatrix{
 }
 object roberto{
   var transporte = camion
-  const peso = 90 + transporte.peso()
+  const peso = 90
   method cambiarTransporte(vehiculo){
     transporte = vehiculo
   }
   method peso(){
-    return peso
+    return peso + transporte.peso()
   }
   method tieneCredito(){
     return false
@@ -67,18 +68,20 @@ object unPaquete{
   var peso = 0
   var pagoAprobado = false
   method aprobarPago(){
-    pagoAprobado = true
+    pagoAprobado = !pagoAprobado
   }
   method cambiarPaquete(otroPaquete){
-    peso = otroPaquete
+    peso = otroPaquete.peso()
   }
   method peso(){
     return peso
   }
   method estaPago(){
-    pagoAprobado = true
+    return pagoAprobado
   }
-
+  method precio(){
+    return 50
+  }
 }
 
 // MENSAJERIA 2DA PARTE
@@ -95,5 +98,50 @@ object empresaDeMensajeria{
    // mensajeros.removeAll(mensajeros)
     mensajeros.clear()
   }
-
+  method laMensajeriaEsGrande(){
+    return
+    mensajeros.size() > 2
+  }
+  method primerMensajeroDeLaLista(){ 
+    return mensajeros.first()
+  }
+  method elPrimerEmpleadoDeLaListaPuedeEntregarEl(paquete){
+    return null.puedeEntregarElPaquete(paquete, self.primerMensajeroDeLaLista())
+  }
+  method ultimoMensajero(){
+    return 
+    mensajeros.last()
+  }
+  method pesoUltimoMensajero(){
+    self.ultimoMensajero().peso()
+  }
+  method mensajeros(){
+    return mensajeros
+  }
+}
+//TERCERA PARTE MENSAJERIA RECARGADA
+object paquetito{
+  method estaPago(){
+    return true
+ }
+  method precio(){
+   return 0
+ }
+}
+object paquetonViajero{
+   var destinos = 0
+   var pagos = 0
+   method modificarDestinos(cantDestinos){
+    destinos = cantDestinos
+   }
+   method realizarUnPago(cantidadAPagar){
+    pagos += cantidadAPagar
+   }
+   method precio(){
+    return destinos * 100
+   }
+   method estaPago(){
+    return pagos == 12
+   }
+   
 }
